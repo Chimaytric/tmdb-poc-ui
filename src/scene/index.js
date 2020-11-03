@@ -1,2 +1,3 @@
-export { default as Loader } from './Loader';
-export { default as Content } from './Content';
+export { default as Genres } from './Genres';
+export { default as Movies } from './Movies';
+export { default as Search } from './Search';

@@ -1,31 +1,25 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
-import { useFetchData } from './hooks';
-import { Loader } from './scene';
+import { useFetchData, useGenreFilters, useSearch } from './hooks';
+import { fetchUrl } from './utils';
+import { Search, Genres, Movies } from './scene';
+import { URL, GENRES_ENDPOINT} from './constants';
 
-const Content = React.lazy(() => import('./scene/Content'));
-
-const fetchUrl = async (url) => {
-    const result = await fetch(url);
-    return result.json();
-}
-
-const fetchMovies = async () => await fetchUrl('http://localhost:2000/movies');
-
-const fetchGenres = async () => await fetchUrl('http://localhost:2000/genres');
+const fetchGenres = async () => await fetchUrl(`${URL}${GENRES_ENDPOINT}`)
 
 const App = () => {
-    const { data : [movies, genres], isLoading } = useFetchData(
-        { fetchFunction : fetchMovies, initialValue : [] },
-        { fetchFunction : fetchGenres, initialValue : [] },
-    );
+    const [genres, genresLoading] = useFetchData(fetchGenres);
 
-    const loader = <Loader />;
+    const { genreFilters, toggleGenreFilter } = useGenreFilters(genres);
 
-    return isLoading ? loader : (
-        <Suspense fallback={loader}>
-            <Content movies={movies} genres={genres} />
-        </Suspense>
+    const [movies, moviesLoading, search] = useSearch(genres);
+
+    return (
+        <>
+            <Search search={search} />
+            <Genres isLoading={genresLoading} genres={genres} genreFilters={genreFilters} toggleGenreFilter={toggleGenreFilter} />
+            <Movies isLoading={moviesLoading} genreFilters={genreFilters} movies={movies} />
+        </>
     );
 };
 
