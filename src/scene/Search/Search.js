@@ -9,7 +9,7 @@ const Search = ({ disabled, search }) => {
     const onEnterPress = (e) => {
         const code = e.keyCode || e.which;
 
-        if (code === 13) {
+        if (code === 13 && searchKey) {
             search(searchKey);
         }
     }
@@ -17,7 +17,7 @@ const Search = ({ disabled, search }) => {
     return (
         <SearchBar>
             <SearchInput disabled={disabled} type="text" placeholder="Look for movies" value={searchKey} onChange={setSearchKeyFromEvent} onKeyPress={onEnterPress} />
-            <SearchButton disabled={disabled} onClick={() => search(searchKey)} ><SearchIcon /></SearchButton>
+            <SearchButton disabled={disabled  || !searchKey} onClick={() => search(searchKey)} ><SearchIcon /></SearchButton>
         </SearchBar>
     );
 };
