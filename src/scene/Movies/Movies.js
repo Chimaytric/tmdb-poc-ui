@@ -8,17 +8,14 @@ import Movie from './Movie';
 const Movies = ({ movies, isLoading, genreFilters }) => {
     const [selectedMovie, setSelectedMovie, toggleMovie] = [
         ...useState(null),
-        movieId => {
-            console.log('toto',movieId,selectedMovie)
-            selectedMovie === movieId ? setSelectedMovie(null) : setSelectedMovie(movieId)
-        },
+        movieId => selectedMovie === movieId ? setSelectedMovie(null) : setSelectedMovie(movieId),
     ];
-    const moviesList = filterMovies(movies, genreFilters)
-        .map(movie => (
-            <Movie key={movie.id} {...movie} isSelected={movie.id === selectedMovie} toggleIsSelected={() => toggleMovie(movie.id)} />
-        ));
-    
-    console.log(selectedMovie)
+    const moviesList = movies.length <= 500
+        ? filterMovies(movies, genreFilters)
+            .map(movie => (
+                <Movie key={movie.id} {...movie} isSelected={movie.id === selectedMovie} toggleIsSelected={() => toggleMovie(movie.id)} />
+            ))
+            : <p>Too many results ({movies.length}) please refine your search</p>
 
         return isLoading ? <Loader /> : <MoviesContainer>{moviesList}</MoviesContainer>;
 };
