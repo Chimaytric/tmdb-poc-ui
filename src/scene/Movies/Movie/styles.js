@@ -22,6 +22,7 @@ export const Details = styled.div`
     display: flex;
     flex-direction: column;
     opacity: ${({ isSelected }) => isSelected ? '1' : '0'};
+    width: ${({ isSelected }) => isSelected ? '600px' : '0px'};
     transition: all 0.3s ease;
 `;
 
