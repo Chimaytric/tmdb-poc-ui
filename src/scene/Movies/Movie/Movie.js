@@ -5,7 +5,7 @@ import { MovieContainer, Poster, Details, Title, Synopsis, Genres, Genre } from 
 
 const Movie = ({ poster, title, synopsis, genres, isSelected, toggleIsSelected }) => (
     <MovieContainer isSelected={isSelected} onClick={toggleIsSelected} >
-        <Poster isSelected={isSelected} src={poster} />
+        <Poster isSelected={isSelected} src={poster ? poster : '/placeholder.png'} />
         <Details isSelected={isSelected}>
             <Title>{title}</Title>
             <Synopsis>{synopsis}</Synopsis>
