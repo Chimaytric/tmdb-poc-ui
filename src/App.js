@@ -16,7 +16,7 @@ const App = () => {
 
     return (
         <>
-            <Search search={search} />
+            <Search search={search} disabled={genresLoading || moviesLoading} />
             <Genres isLoading={genresLoading} genres={genres} genreFilters={genreFilters} toggleGenreFilter={toggleGenreFilter} />
             <Movies isLoading={moviesLoading} genreFilters={genreFilters} movies={movies} />
         </>

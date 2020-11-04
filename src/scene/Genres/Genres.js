@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LocalOffer } from '@material-ui/icons';
 
+import { Loader } from '../../components';
 import { GenresContainer, Genre } from './styles';
 
 const Genres = ({ isLoading, genres, genreFilters, toggleGenreFilter }) => {
@@ -16,11 +17,13 @@ const Genres = ({ isLoading, genres, genreFilters, toggleGenreFilter }) => {
         </Genre>
     ));
 
-    return (
-        <GenresContainer>
-            {genresList}
-        </GenresContainer>
-    );
+    return isLoading
+        ? <Loader />
+        : (
+            <GenresContainer>
+                {genresList}
+            </GenresContainer>
+        );
 };
 
 export default Genres;

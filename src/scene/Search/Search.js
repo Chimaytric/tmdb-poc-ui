@@ -3,7 +3,7 @@ import { Search as SearchIcon } from '@material-ui/icons';
 
 import { SearchBar, SearchInput, SearchButton } from './styles';
 
-const Search = ({ search }) => {
+const Search = ({ disabled, search }) => {
     const [searchKey, setSearchKey, setSearchKeyFromEvent] = [...useState(''), e => setSearchKey(e.target.value)];
 
     const onEnterPress = (e) => {
@@ -16,8 +16,8 @@ const Search = ({ search }) => {
 
     return (
         <SearchBar>
-            <SearchInput type="text" placeholder="Look for movies" value={searchKey} onChange={setSearchKeyFromEvent} onKeyPress={onEnterPress} />
-            <SearchButton onClick={() => search(searchKey)} ><SearchIcon /></SearchButton>
+            <SearchInput disabled={disabled} type="text" placeholder="Look for movies" value={searchKey} onChange={setSearchKeyFromEvent} onKeyPress={onEnterPress} />
+            <SearchButton disabled={disabled} onClick={() => search(searchKey)} ><SearchIcon /></SearchButton>
         </SearchBar>
     );
 };
