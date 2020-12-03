@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { append, equals, find, ifElse, pipe, without, uniq } from 'ramda';
+import { append, equals, find, pipe, without, uniq } from 'ramda';
 
-const useGenreFilters = (genres) => {
+const useGenreFilters = () => {
     const [
         genreFilters,
         setGenreFilters,
